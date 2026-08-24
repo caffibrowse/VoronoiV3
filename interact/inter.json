@@ -1,0 +1,27 @@
+{
+  "venti": {
+    "name": "venti",
+    "interactions": {
+      "venti go code": "i dont code, sorry",
+      "venti here is a cookie": "OOO Yummy :3",
+      "venti heres a cookie": "Yum,",
+      "venti you suck": ":|",
+      "venti is a moron": "**I. AM, NOT. A. MORON!!!!** ~*in the voice of wheatley*~"
+    }
+  },
+  "java": {
+    "name": "java",
+    "interactions": {
+      "yum,": "OOH what do you have???",
+      ":|": ";D",
+      "venti is a idiot": "Thats my sister,. You mess with her.. You mess w/ me.."
+    }
+  },
+  "voro3json": {
+    "name": "vorojson",
+    "interactions": {
+      "&botuser&":  "Yea?",
+      "voro3 is advanced": "Thank me or PyxByte"
+    }
+  }
+}

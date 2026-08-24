@@ -1,0 +1,368 @@
+{
+    "results": {
+        "brainrot": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "timestamp": 1787375906.66364
+        },
+        "tung tung sahur": {
+            "brainrot": true,
+            "confidence": 0.9800000000000001,
+            "match": {
+                "title": "Tung Tung Tung Sahur - Wikipedia",
+                "snippet": "Tung Tung Tung Sahur (/ˈtuːŋ ˌsaˈhur/ TOONG sa-HOOR), often shortened to TTT Sahur, T3, [a] Triple T, Tung Tung, or simply …",
+                "url": "https://www.bing.com/ck/a?!&&p=49c72aeef9ded95981c5f21c6752bb9646fe2562c23645f51befcf38fd32a96aJmltdHM9MTc4NzI3MDQwMA&ptn=3&ver=2&hsh=4&fclid=316a7f2f-d1bf-6325-0a61-6892d04f6248&u=a1aHR0cHM6Ly9lbi5tLndpa2lwZWRpYS5vcmcvd2lraS9UdW5nX1R1bmdfVHVuZ19TYWh1cg&ntb=1",
+                "source": "Bing"
+            },
+            "evidence": [
+                {
+                    "source": "Bing",
+                    "title": "Tung Tung Tung Sahur - Know Your Meme",
+                    "terms": [
+                        "brainrot"
+                    ]
+                },
+                {
+                    "source": "Bing",
+                    "title": "Tung Tung Tung Sahur : Italian Brainrot Character Explained",
+                    "terms": [
+                        "brainrot",
+                        "italian brainrot"
+                    ]
+                },
+                {
+                    "source": "Bing",
+                    "title": "What Does ' Tung Tung Tung Sahur ' Mean? The TikTok Brainrot …",
+                    "terms": [
+                        "brainrot"
+                    ]
+                },
+                {
+                    "source": "Bing",
+                    "title": "Tung Tung Tung Sahur Meme - Instagram",
+                    "terms": [
+                        "brainrot",
+                        "italian brainrot",
+                        "brainrot meme"
+                    ]
+                }
+            ],
+            "timestamp": 1787376106.3589218
+        },
+        "ok then": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787376117.268114
+        },
+        "fuck off": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787376144.4974444
+        },
+        "uhh": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787376516.4132144
+        },
+        "what": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787376519.3830142
+        },
+        "wtf": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787376527.0345035
+        },
+        "@everyone fair": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787377073.9038167
+        },
+        "fuck": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787377184.8202765
+        },
+        "epstein": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787377193.0755436
+        },
+        "brain rot": {
+            "brainrot": true,
+            "confidence": 0.795,
+            "match": {
+                "title": "Brain rot - Wikipedia",
+                "snippet": "",
+                "url": "https://en.wikipedia.org/wiki/Brain_rot",
+                "source": "DuckDuckGo"
+            },
+            "evidence": [
+                {
+                    "source": "DuckDuckGo",
+                    "title": "Brain rot - Wikipedia",
+                    "terms": [
+                        "brain rot"
+                    ]
+                },
+                {
+                    "source": "DuckDuckGo",
+                    "title": "Brain Rot: Meaning, Symptoms, and How to Avoid It - WebMD",
+                    "terms": [
+                        "brain rot"
+                    ]
+                },
+                {
+                    "source": "DuckDuckGo",
+                    "title": "What is \"Brain Rot\"? The Gen Alpha Slang Term Explained",
+                    "terms": [
+                        "brain rot"
+                    ]
+                },
+                {
+                    "source": "DuckDuckGo",
+                    "title": "This is 'brain rot,' a slang term with something to it | CNN",
+                    "terms": [
+                        "brain rot"
+                    ]
+                },
+                {
+                    "source": "DuckDuckGo",
+                    "title": "BRAIN ROT Slang Meaning | Merriam-Webster",
+                    "terms": [
+                        "brain rot"
+                    ]
+                },
+                {
+                    "source": "DuckDuckGo",
+                    "title": "Brain Rot: What Endless Scrolling Actually Does to Your Brain (2026)",
+                    "terms": [
+                        "brain rot"
+                    ]
+                },
+                {
+                    "source": "DuckDuckGo",
+                    "title": "The truth about brain rot, according to science",
+                    "terms": [
+                        "brain rot"
+                    ]
+                },
+                {
+                    "source": "DuckDuckGo",
+                    "title": "Brainrot Games - Play Online for Free! - Poki",
+                    "terms": [
+                        "brainrot"
+                    ]
+                }
+            ],
+            "timestamp": 1787377289.7409682
+        },
+        "i still cant see it..": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787413759.0192015
+        },
+        "see whar?": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787413779.681326
+        },
+        "the toi-alerts": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787413788.394247
+        },
+        "oh right": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787413809.686397
+        },
+        "ehh": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787414180.7898138
+        },
+        "try /eco coinflip": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787414233.6193883
+        },
+        "its like gamble but different": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787414241.2996142
+        },
+        ";-;": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787414245.804884
+        },
+        "what do the coins do?": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787414294.4429064
+        },
+        "idk": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787414342.0555587
+        },
+        "they pure gamble moneyz": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787414349.3486595
+        },
+        "is there a dashboard?": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787414358.644737
+        },
+        "yea": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787414367.593183
+        },
+        "1 sec": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787414373.2896152
+        },
+        "here": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787414399.6059031
+        },
+        "i jst rob atm 👍": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787414466.4732087
+        },
+        "where is the dashboard": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787414485.8926551
+        },
+        "also yo": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787414512.1449022
+        },
+        "think u should try /eco work": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787414521.6689367
+        },
+        "try work command": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787414532.1243563
+        },
+        "bwhere is the dashoard": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787414544.3635857
+        },
+        "https://klipy.com/gifs/yuji-11": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787414546.462503
+        },
+        "try /eco work btw": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787414552.9017398
+        },
+        "whar dashboard": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787414593.8760061
+        },
+        "it leaderboard-": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787414670.0474215
+        },
+        "oh i meant like a dashboard for cmds": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787414705.1688426
+        },
+        "hitler": {
+            "brainrot": false,
+            "confidence": 0.0,
+            "match": null,
+            "evidence": [],
+            "timestamp": 1787502877.2215059
+        }
+    }
+}
