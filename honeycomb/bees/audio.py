@@ -3,6 +3,7 @@ import os
 import re
 import subprocess
 import tempfile
+import time
 
 import discord
 
@@ -85,10 +86,16 @@ async def handle_message(message):
             text = text.replace(old, new)
 
         filtered = await veto.checkswear(message, type="AudioFiltered")
-
+        j4xx = await veto.checkswear(message, type="Jxx")
         if filtered == "true":
-            text = "filtered"
-        await speak(voice_client, text)
+            text = [f"{message.author.name}",
+                    "filtered",
+                    f"{j4xx}"]
+            for i in text:
+                await speak(voice_client, i)
+                time.sleep(0.3)
+        else:
+            await speak(voice_client, text)
 
         return
 
