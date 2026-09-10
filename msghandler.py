@@ -6,6 +6,8 @@ import discord
 from discord.ext import commands
 import dotenv
 
+from ats import toiat
+from bees import audio
 from honeycomb.bees import nexus
 from honeycomb.bees import tart
 from honeycomb.bees import toi
@@ -16,9 +18,11 @@ from honeycomb.swarm.spamprotect import (
 )
 
 from interact import interact
-from msgskills import _msgdirect
+from msgskills import _msgdirect, fun
 from nectar import nectar
+from swarm.veto import checkswear
 
+import ats.toiat
 
 # ==========================================================
 # CONFIG
@@ -335,15 +339,27 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
+    await fun.test(message)
+    await audio.handle_message(message)
+
+    if message.author.id != bot.user.id:
+        if str(message.channel).endswith("-alerts"):
+            await message.reply("This is a alert channel . please have conversations elsewhere")
+            await message.delete()
+            return
 
     # ======================================================
     # IGNORE BOTS
     # ======================================================
+    import honeycomb.swarm.veto
+
+    await checkswear(message)
 
     if message.author.bot:
 
         return
 
+    await ats.toiat.at(message)
 
     # ======================================================
     # IGNORE DMs
@@ -542,21 +558,19 @@ async def on_message(message):
             reason=tart_reason
         )
 
-
         # ==================================================
         # TOI
         # ==================================================
         #
-        # toi2mod() is the official TOI entry point.
-        #
-        # It should detect and return:
+        # TOI detects and feeds Nexus:
         #
         #     flagged
         #     reason
         #     person
         #     crime
+        #     enabled
         #
-        # It must NOT call Nexus.process().
+        # Nexus makes the moderation decision.
         #
         # ==================================================
 
@@ -564,6 +578,7 @@ async def on_message(message):
         toi_reason = None
         toi_person = None
         toi_crime = None
+        toi_enabled = False
 
         try:
 
@@ -572,15 +587,16 @@ async def on_message(message):
             )
 
             if (
-                isinstance(toi_result, tuple)
-                and len(toi_result) == 4
+                    isinstance(toi_result, tuple)
+                    and len(toi_result) == 5
             ):
 
                 (
                     toi_flagged,
                     toi_reason,
                     toi_person,
-                    toi_crime
+                    toi_crime,
+                    toi_enabled
                 ) = toi_result
 
             else:
@@ -597,13 +613,13 @@ async def on_message(message):
                 f"{error}"
             )
 
-
         nexus.update_toi(
             message,
             flagged=toi_flagged,
             reason=toi_reason,
             person=toi_person,
-            crime=toi_crime
+            crime=toi_crime,
+            enabled=toi_enabled
         )
 
 

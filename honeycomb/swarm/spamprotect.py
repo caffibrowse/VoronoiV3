@@ -5,8 +5,8 @@ import discord
 from honeycomb.swarm.message_auth import send_alert
 
 
-SPAM_MESSAGE_LIMIT = 5
-SPAM_TIME_WINDOW = 3
+SPAM_MESSAGE_LIMIT = 3
+SPAM_TIME_WINDOW = 5
 SPAM_WARNING_COOLDOWN = 10
 
 

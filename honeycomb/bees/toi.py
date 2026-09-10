@@ -1,6 +1,6 @@
 import re
 
-from nectar import nectar
+import nectar.nectar
 from swarm import toilecheck
 
 
@@ -19,49 +19,6 @@ async def toi2mod(message):
         "bot",
         False
     ):
-
-        return False, None, None, None
-
-
-    # ======================================================
-    # CONFIG
-    # ======================================================
-
-    try:
-
-        data = nectar.get_data(
-            "data/toi.json"
-        )
-
-    except Exception as error:
-
-        print(
-            f"[TOI] Config error: {error}"
-        )
-
-        return False, None, None, None
-
-
-    if not isinstance(
-        data,
-        dict
-    ):
-
-        print(
-            "[TOI] Invalid configuration."
-        )
-
-        return False, None, None, None
-
-
-    if not data.get(
-        "enabled",
-        False
-    ):
-
-        print(
-            "[TOI] Disabled."
-        )
 
         return False, None, None, None
 
@@ -91,7 +48,7 @@ async def toi2mod(message):
     flagged = False
     person = None
     crime = None
-
+    enabled = nectar.nectar.get_data("data/toi.json")
 
     try:
 
@@ -214,12 +171,13 @@ async def toi2mod(message):
 
 
     # ======================================================
-    # RETURN TO MSGHANDLER
+    # RETURN TO NEXUS
     # ======================================================
 
     return (
         flagged,
         reason,
         person,
-        crime
+        crime,
+        enabled
     )

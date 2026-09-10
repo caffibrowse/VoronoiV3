@@ -1,7 +1,7 @@
 import discord
 
 
-TOI2_CHANNEL_NAME = "toi2-alerts"
+TOI2_CHANNEL_NAME = "sieve-alerts"
 TOI2_ROLE_NAME = "Voro3QuickAuth"
 
 

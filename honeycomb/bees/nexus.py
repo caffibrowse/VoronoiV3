@@ -12,6 +12,7 @@
 #     - replies
 #     - deletion
 #     - alerts
+#     - module enabled/disabled state
 #
 # Nexus does NOT create a Discord client.
 # Nexus does NOT log into Discord.
@@ -20,6 +21,8 @@
 # ==========================================================
 
 import discord
+
+from nectar import nectar
 
 
 # ==========================================================
@@ -64,6 +67,8 @@ toiflagged = False
 toireason = None
 toiperson = None
 toicrime = None
+
+toi_enabled = False
 
 
 # ==========================================================
@@ -164,6 +169,82 @@ def update_message(msg):
 
 
 # ==========================================================
+# GET TOI ENABLED STATE
+# ==========================================================
+#
+# Nexus owns the operational state of TOI.
+#
+# TOI2 can still detect messages while TOI is disabled.
+# Nexus decides whether that result should actually
+# trigger moderation.
+#
+# ==========================================================
+
+def get_toi_enabled():
+
+    try:
+
+        data = nectar.get_data(
+            "data/toi.json"
+        )
+
+    except Exception as error:
+
+        print(
+            f"[NEXUS] TOI config error: {error}"
+        )
+
+        return False
+
+    if not isinstance(
+        data,
+        dict
+    ):
+
+        print(
+            "[NEXUS] Invalid TOI configuration."
+        )
+
+        return False
+
+    enabled = bool(
+        data.get(
+            "enabled",
+            False
+        )
+    )
+
+    return enabled
+
+
+# ==========================================================
+# TEST CHANNEL CHECK
+# ==========================================================
+#
+# Channels beginning with "toi-testenv" are always
+# allowed to run TOI moderation for testing.
+#
+# Examples:
+#
+#     #toi-testenv
+#     #toi-testenv-2
+#     #toi-testenv-testing
+#
+# ==========================================================
+
+def is_toi_test_channel():
+
+    if channel_name is None:
+        return False
+
+    return str(
+        channel_name
+    ).casefold().startswith(
+        "toi-testenv"
+    )
+
+
+# ==========================================================
 # RESET DETECTIONS
 # ==========================================================
 
@@ -214,6 +295,8 @@ def reset():
 
     global in13plus
 
+    global toi_enabled
+
     message = None
     message_id = None
     content = None
@@ -236,6 +319,8 @@ def reset():
 
     in13plus = False
 
+    toi_enabled = False
+
     reset_detections()
 
 
@@ -254,7 +339,10 @@ def update_tart(
 
     update_message(msg)
 
-    tartflagged = bool(flagged)
+    tartflagged = bool(
+        flagged
+    )
+
     tartreason = reason
 
     print(
@@ -273,13 +361,15 @@ def update_toi(
     flagged=False,
     reason=None,
     person=None,
-    crime=None
+    crime=None,
+    enabled=False
 ):
 
     global toiflagged
     global toireason
     global toiperson
     global toicrime
+    global toi_enabled
 
     update_message(msg)
 
@@ -289,10 +379,23 @@ def update_toi(
     toiperson = person
     toicrime = crime
 
+    # TOI feeds its enabled state to Nexus.
+    # Nexus decides what to do with it.
+
+    toi_enabled = bool(enabled)
+
     print(
         f"[NEXUS] TOI: "
         f"{toiflagged} | "
-        f"{toireason}"
+        f"Person: {toiperson}"
+    )
+
+    print(
+        f"Crime: {toicrime}"
+    )
+
+    print(
+        f"Enabled: {toi_enabled}"
     )
 
 
@@ -497,10 +600,44 @@ async def safe_delete():
 
 
 # ==========================================================
+# CHANNEL CHECK
+# ==========================================================
+
+def checkchannel(channel_type):
+
+    if channel_name is None:
+        return True
+
+    schannel = str(
+        channel_name
+    ).casefold()
+
+    # 12-* and 13-* channels allow TART flagged
+    # content to pass without deletion.
+
+    if (
+        schannel.startswith("13")
+        or schannel.startswith("12")
+    ):
+
+        if channel_type == "tart":
+            return False
+
+    # Everything else is protected by TART.
+
+    if channel_type == "tart":
+        return True
+
+    return True
+
+
+# ==========================================================
 # PROCESS
 # ==========================================================
 
 async def process():
+
+    global toi_enabled
 
     if message is None:
 
@@ -509,6 +646,22 @@ async def process():
         )
 
         return
+
+    # ------------------------------------------------------
+    # Nexus reads the current TOI configuration here.
+    # ------------------------------------------------------
+
+    toi_enabled = get_toi_enabled()
+
+    schannel = str(
+        channel_name or ""
+    ).casefold()
+
+    toi_test_channel = (
+        schannel.startswith(
+            "toi-testenv"
+        )
+    )
 
     print(
         "========== NEXUS =========="
@@ -535,6 +688,15 @@ async def process():
     )
 
     print(
+        f"TOI Enabled: {toi_enabled}"
+    )
+
+    print(
+        f"TOI Test Channel: "
+        f"{toi_test_channel}"
+    )
+
+    print(
         "============================"
     )
 
@@ -551,8 +713,23 @@ async def process():
     # ======================================================
     # BOTH FLAGGED
     # ======================================================
+    #
+    # TART is protected by the normal channel rules.
+    # TOI's enabled state determines whether TOI is
+    # operational, EXCEPT inside a TOI test channel.
+    #
+    # ======================================================
 
     if tartflagged and toiflagged:
+
+        toi_should_moderate = (
+            toi_enabled
+            or toi_test_channel
+        )
+
+        tart_should_moderate = (
+            checkchannel("tart")
+        )
 
         description = (
             f"Message: {content}\n"
@@ -561,19 +738,26 @@ async def process():
             f"TOI Reason: {toireason}\n"
             f"Person: {toiperson or 'Unknown'}\n"
             f"Crime: {toicrime or 'Unknown'}\n"
+            f"TOI Enabled: {toi_enabled}\n"
+            f"TOI Test Channel: {toi_test_channel}\n"
             f"TART Reason: {tartreason}"
         )
 
+        # --------------------------------------------------
+        # TOI + TART both operational
+        # --------------------------------------------------
 
-        await safe_reply(
-            "Both TOI + TART flagged your message. "
-            "Don't do that again!"
-        )
+        if (
+            toi_should_moderate
+            and tart_should_moderate
+        ):
 
-        await safe_delete()
+            await safe_reply(
+                "Both TOI + TART flagged your message. "
+                "Don't do that again!"
+            )
 
-
-        if not in13plus:
+            await safe_delete()
 
             await send_alert(
                 guild,
@@ -582,11 +766,71 @@ async def process():
                 description
             )
 
+            await send_alert(
+                guild,
+                TOI_CHANNEL_NAME,
+                "General Violation",
+                description
+            )
+
+            return
+
+
+        # --------------------------------------------------
+        # TOI operational, TART allowed in this channel
+        # --------------------------------------------------
+
+        if toi_should_moderate:
+
+            await safe_reply(
+                "TOI blocked your message."
+            )
+
+            await safe_delete()
+
+            await send_alert(
+                guild,
+                TOI_CHANNEL_NAME,
+                "TOI Violation",
+                description
+            )
+
+            print(
+                "[NEXUS] TOI moderated; "
+                "TART allowed by channel rules."
+            )
+
+            return
+
+
+        # --------------------------------------------------
+        # TOI disabled and TART allowed
+        # --------------------------------------------------
+
+        if not tart_should_moderate:
+
+            print(
+                "[NEXUS] TOI disabled/test-only and "
+                "TART allowed by channel rules."
+            )
+
+            return
+
+
+        # --------------------------------------------------
+        # TOI disabled but TART operational
+        # --------------------------------------------------
+
+        await safe_reply(
+            "TART: This message is not allowed here."
+        )
+
+        await safe_delete()
 
         await send_alert(
             guild,
-            TOI_CHANNEL_NAME,
-            "General Violation",
+            TART_CHANNEL_NAME,
+            "TART Violation",
             description
         )
 
@@ -598,6 +842,30 @@ async def process():
     # ======================================================
 
     if toiflagged:
+
+        # --------------------------------------------------
+        # Normal channel:
+        # only moderate if TOI is enabled.
+        # --------------------------------------------------
+
+        if not toi_enabled:
+
+            if toi_test_channel:
+
+                print(
+                    "[NEXUS] TOI is disabled, "
+                    "but this is a TOI test channel."
+                )
+
+            else:
+
+                print(
+                    "[NEXUS] TOI flagged message, "
+                    "but TOI is disabled."
+                )
+
+                return
+
 
         await safe_reply(
             "TOI blocked your message."
@@ -615,7 +883,9 @@ async def process():
                 f"Channel: #{channel_name}\n"
                 f"Reason: {toireason}\n"
                 f"Person: {toiperson or 'Unknown'}\n"
-                f"Crime: {toicrime or 'Unknown'}"
+                f"Crime: {toicrime or 'Unknown'}\n"
+                f"TOI Enabled: {toi_enabled}\n"
+                f"TOI Test Channel: {toi_test_channel}"
             )
         )
 
@@ -628,15 +898,14 @@ async def process():
 
     if tartflagged:
 
-        if in13plus:
+        if checkchannel("tart") == False:
 
             print(
                 "[NEXUS] TART flagged content "
-                "inside 13+; allowing."
+                "inside 12+/13+; allowing."
             )
 
             return
-
 
         await safe_reply(
             "TART: This message is not allowed here."
@@ -737,6 +1006,14 @@ def debug():
 
     print(
         f"toicrime      = {toicrime}"
+    )
+
+    print(
+        f"toi_enabled   = {toi_enabled}"
+    )
+
+    print(
+        f"toi_testenv   = {is_toi_test_channel()}"
     )
 
     print(
