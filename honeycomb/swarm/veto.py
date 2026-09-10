@@ -1,3 +1,4 @@
+import random
 import re
 import aiohttp
 
@@ -7,7 +8,8 @@ swears = [
     "bitch",
     "cock",
     "pussy",
-    "ass"
+    "ass",
+    "butt",
 ]
 
 async def wikipedia_check(term):
@@ -87,5 +89,8 @@ async def checkswear(message, type="AUTO"):
         await message.reply("language!")
         await message.delete()
         return "true"
+    elif type == "Jxx":
+        await message.channel.send("shiii")
+        return random.randint(1, 10000000)
 
     return True
