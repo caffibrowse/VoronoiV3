@@ -90,7 +90,6 @@ async def checkswear(message, type="AUTO"):
         await message.delete()
         return "true"
     elif type == "Jxx":
-        await message.channel.send("shiii")
         return random.randint(1, 10000000)
 
     return True
